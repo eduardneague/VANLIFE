@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {useParams} from 'react-router-dom'
-import {Context} from '../src/ContextProvider'
-import {VanType} from '../types/VanType'
+import {Context} from '../../src/ContextProvider'
+import {VanType} from '../../types/VanType'
 import {AiOutlineArrowLeft} from 'react-icons/ai'
 import {Link} from 'react-router-dom'
 
