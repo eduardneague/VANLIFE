@@ -1,9 +1,8 @@
 import React from 'react'
-
-// type,
+import {Link} from 'react-router-dom'
 
 interface Props {
-    key: string;
+    key: string; 
     id: string;
     name: string;
     type: string;
@@ -11,19 +10,20 @@ interface Props {
     price: number;
 }
 
-const simpleStyle = {
-    backgroundColor: '#f97316'
-}
-
-const luxuryStyle = {
-    backgroundColor: 'black'
-}
-
-const ruggedStyle = {
-  backgroundColor: '#064e3b'
-}
-
 const Van: React.FC<Props> = (props): JSX.Element => {
+  
+  const simpleStyle = {
+    backgroundColor: '#f97316'
+  }
+
+  const luxuryStyle = {
+    backgroundColor: 'black'
+  }
+
+  const ruggedStyle = {
+    backgroundColor: '#064e3b'
+  }
+
   let style
   if(props.type === 'simple') {
     style = simpleStyle
@@ -34,6 +34,7 @@ const Van: React.FC<Props> = (props): JSX.Element => {
   }
 
   return (
+    <Link to = {`/vans/${props.id}`} >
     <div className="VAN_WRAPPER cursor-pointer h-full w-full flex flex-col items-center">
       <img src= {props.imageUrl} alt="image" className = "shadow rounded h-10/12 w-11/12"  />
       <div className="FLEX_WRAPPER flex w-11/12 h-1/4 justify-between mt-2">
@@ -47,6 +48,7 @@ const Van: React.FC<Props> = (props): JSX.Element => {
           <h1 className = "absolute top-0 right-0">/day</h1>
         </div>
     </div>
+    </Link>
   )
 }
 

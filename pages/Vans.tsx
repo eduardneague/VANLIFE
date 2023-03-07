@@ -1,33 +1,24 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext} from 'react'
 import Van from '../components/Van'
-import { nanoid } from 'nanoid'
+import {nanoid} from 'nanoid'
+import {VanType} from '../types/VanType'
 
-const Vans: React.FC = ():JSX.Element => {
+import {Context} from '../src/ContextProvider'
 
-  const [vans, setVans] = useState<Array<Object>>([])
-  const [loading, setLoading] = useState<boolean>(true)
+const Vans: React.FC = (): JSX.Element => {
 
-  useEffect(() => {
-    const fetchRequest = async () => {
-      const response = await fetch("/api/vans")
-      const data = await response.json()
-      setVans(data.vans)
-      setLoading(false)
-    }
-    fetchRequest()
-  }, [])
-
-  const vanElements = vans.map((van: any) => {
+  const {vans, loading} = useContext(Context)
+  
+  const vanElements = vans.map((van: VanType) => {
       return (
         <Van
           key = {nanoid()}
-          id = {nanoid()}
+          id = {van.id}
           name = {van.name}
           type = {van.type}
           price = {van.price}
           imageUrl = {van.imageUrl}
         />
-
       )
   })
 

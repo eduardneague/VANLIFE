@@ -6,7 +6,7 @@ const About: React.FC = (): JSX.Element => {
         <div className="IMAGE bg-about-hero bg-cover w-full h-52 flex justify-center items-center"></div>
         <div className="Text bg-orange-100 h-80 w-full flex justify-center items-center">
             <div className="FLEX_TEXT_WRAPPER flex flex-col w-10/12 h-full justify-center">
-                <h1 className = "text-xl font-bold">Don't squeeze in a sedan when you could relax in a van</h1>
+                <h1 className = "text-xl font-bold mt-6">Don't squeeze in a sedan when you could relax in a van</h1>
                 <br/><p className = "text-md">
                     Our mission is to enliven your road trip with the perfect travel van rental.
                     Our vans are recertified before each trip to ensure your travel plans can go off without a hitch.
