@@ -37,7 +37,7 @@ const Vans: React.FC = (): JSX.Element => {
           type = {van.type}
           price = {van.price}
           imageUrl = {van.imageUrl}
-          isRented = {false}
+          isRented = {van.isRented}
         />
       )
   })

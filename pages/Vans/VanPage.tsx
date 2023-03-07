@@ -59,9 +59,9 @@ const VanPage: React.FC = (props): JSX.Element => {
                 {isRented ? 
                 <button 
                     onClick = {() => {
+                        console.log("remove ran" + isRented)
                         toggleRented(id)
                         removeRented(id)
-                        
                     }}
                     className = "w-full bg-gray-500 rounded h-10 font-bold shadow mt-5 mb-5 text-white">
                         Unrent this van
@@ -69,6 +69,7 @@ const VanPage: React.FC = (props): JSX.Element => {
                 :
                 <button 
                     onClick = {() => {
+                        console.log("added ran" + isRented)
                         toggleRented(id)
                         addRented(id)
                     }}

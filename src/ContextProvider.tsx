@@ -22,6 +22,13 @@ const ContextProvider: React.FC<Props> = ({children}): JSX.Element => {
                 } else return van
             })
         })
+        setInitialVans((prevVans: any) => {
+            return prevVans.map((van: VanType) => {
+                if(van.id === id) {
+                    return {...van, isRented: !van.isRented}
+                } else return van
+            })
+        })
     }
 
     function addRented(id: string): void {
@@ -34,6 +41,13 @@ const ContextProvider: React.FC<Props> = ({children}): JSX.Element => {
 
     function removeRented(id: string): void {
         setRentedVans((prevVans) => prevVans.filter(van => van.id !== id))
+        setVans((prevVans: any) => {
+            return prevVans.map((van: VanType) => {
+                if(van.id === id) {
+                    return {...van, isRented: false}
+                } else return van
+            })
+        })
     }
 
     useEffect(() => {

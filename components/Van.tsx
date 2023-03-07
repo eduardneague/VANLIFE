@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
+import {AiFillCheckCircle} from 'react-icons/ai'
 
 interface Props {
     key: string; 
@@ -11,7 +12,10 @@ interface Props {
     isRented: boolean;
 }
 
+// ADD LITTLE INDICATOR TO KNOW IF ITS RENTED OR NOT ON VANS SCREEN, BILU MUIST JEGOS NU MA LASA SA TERMIN
+
 const Van: React.FC<Props> = (props): JSX.Element => {
+
   let style
   if(props.type === 'simple') {
     style = {backgroundColor: '#f97316'}
@@ -23,7 +27,8 @@ const Van: React.FC<Props> = (props): JSX.Element => {
 
   return (
     <Link to = {`/vans/${props.id}`} >
-    <div className="VAN_WRAPPER cursor-pointer h-full w-full flex flex-col items-center">
+    <div className="VAN_WRAPPER cursor-pointer h-full w-full flex flex-col items-center relative">
+      {props.isRented ? <AiFillCheckCircle className = "absolute top-1 right-3 h-8 w-8 text-green-600"/>: ""}
       <img src= {props.imageUrl} alt="image" className = "shadow rounded h-10/12 w-11/12"  />
       <div className="FLEX_WRAPPER flex w-11/12 h-1/4 justify-between mt-2">
         <h1 className = "font-bold text-md max-w-[80%]"> {props.name} </h1>
