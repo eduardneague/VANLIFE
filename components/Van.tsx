@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 
 interface Props {
@@ -8,10 +8,10 @@ interface Props {
     type: string;
     imageUrl: string;
     price: number;
+    isRented: boolean;
 }
 
 const Van: React.FC<Props> = (props): JSX.Element => {
-
   let style
   if(props.type === 'simple') {
     style = {backgroundColor: '#f97316'}

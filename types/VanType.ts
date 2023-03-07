@@ -5,5 +5,6 @@ export type VanType = {
     description: string;
     imageUrl: string;
     type: string;
+    isRented: boolean;
 }
 
