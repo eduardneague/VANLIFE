@@ -1,8 +1,8 @@
 import React, {useContext} from 'react'
 import Van from '../components/Van'
 import {nanoid} from 'nanoid'
-import {VanType} from '../types/VanType'
 
+import {VanType} from '../types/VanType'
 import {Context} from '../src/ContextProvider'
 
 const Vans: React.FC = (): JSX.Element => {

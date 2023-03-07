@@ -11,26 +11,14 @@ interface Props {
 }
 
 const Van: React.FC<Props> = (props): JSX.Element => {
-  
-  const simpleStyle = {
-    backgroundColor: '#f97316'
-  }
-
-  const luxuryStyle = {
-    backgroundColor: 'black'
-  }
-
-  const ruggedStyle = {
-    backgroundColor: '#064e3b'
-  }
 
   let style
   if(props.type === 'simple') {
-    style = simpleStyle
+    style = {backgroundColor: '#f97316'}
   } else if(props.type === 'luxury') {
-    style = luxuryStyle
+    style = {backgroundColor: 'black'}
   } else if(props.type === 'rugged') {
-    style = ruggedStyle
+    style = {backgroundColor: '#064e3b'}
   }
 
   return (

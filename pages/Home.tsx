@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Home: React.FC = (): JSX.Element => {
   return (
@@ -9,7 +10,9 @@ const Home: React.FC = (): JSX.Element => {
               <p className = "max-w-full text-sm">Add adventure to your life by joining the #vanlife movement.
                 Rent the perfect van to make your perfect road trip.
               </p>
-              <button className = "w-full bg-orange-500 rounded h-10 font-bold shadow">Find your van</button>
+              <Link to = "/vans">
+                <button className = "w-full bg-orange-500 rounded h-10 font-bold shadow">Find your van</button>
+              </Link>
           </div>
         </div>
     </div>

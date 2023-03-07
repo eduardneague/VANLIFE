@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const About: React.FC = (): JSX.Element => {
   return (
@@ -19,11 +20,12 @@ const About: React.FC = (): JSX.Element => {
             <div className="FLEX_TEXT_WRAPPER flex flex-col w-10/12 h-full justify-center">
                 <div className="FLEX-DESTINATION bg-orange-300 w-full h-40 rounded-md flex flex-col gap-5 justify-center pl-6">
                     <h1 className = "font-bold text-xl">Your destination is waiting. Your van is ready.</h1>
+                    <Link to = "/vans">
                     <button className = "rounded bg-black text-white text-md p-2 w-40">Explore our vans</button>
+                    </Link>
                 </div>
             </div>
         </div>
-
     </div>
   )
 }
