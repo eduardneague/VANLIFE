@@ -48,6 +48,13 @@ const ContextProvider: React.FC<Props> = ({children}): JSX.Element => {
                 } else return van
             })
         })
+        setInitialVans((prevVans: any) => {
+            return prevVans.map((van: VanType) => {
+                if(van.id === id) {
+                    return {...van, isRented: false}
+                } else return van
+            })
+        })
     }
 
     useEffect(() => {
