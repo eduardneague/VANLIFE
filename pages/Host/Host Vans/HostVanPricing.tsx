@@ -1,13 +1,10 @@
-import React, {useContext} from 'react'
-import {Context} from '../../../src/ContextProvider'
-import {useParams} from 'react-router-dom'
-import {VanType} from '../../../types/VanType'
+import React from 'react'
+import {useOutletContext} from 'react-router-dom'
+import { VanType } from '../../../types/VanType'
 
 const HostVanPricing: React.FC = () => {
 
-    const {vans} = useContext(Context)
-    const {van_id} = useParams()
-    const {name, price} = vans.find((van: VanType) => van.id === van_id)
+    const {price}: VanType = useOutletContext()
 
     return (
         <div className = "w-full h-auto bg-white rounded-md shadow-md flex justify-center">
