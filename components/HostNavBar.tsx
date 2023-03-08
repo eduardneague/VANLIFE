@@ -5,16 +5,16 @@ const HostNavBar: React.FC = (): JSX.Element => {
   return (
     <div className="w-full h-10 flex justify-center items-center">
         <div className = "w-10/12 h-full flex gap-2 items-center">
-            <NavLink to = "/host" end className = 
+            <NavLink to = "." end className = 
             {({isActive}) => isActive ? "text-orange-900 text-xl font-bold": "text-orange-900 text-xl"}>Dashboard</NavLink>
 
-            <NavLink to = "/host/income" className = 
+            <NavLink to = "income" className = 
             {({isActive}) => isActive ? "text-orange-900 font-bold text-xl": "text-orange-900 text-xl"}>Income</NavLink>
 
-            <NavLink to = "/host/vans" className = 
+            <NavLink to = "vans" className = 
             {({isActive}) => isActive ? "text-orange-900 font-bold text-xl": "text-orange-900 text-xl"}>Vans</NavLink>
 
-            <NavLink to = "/host/reviews" className = 
+            <NavLink to = "reviews" className = 
             {({isActive}) => isActive ? "text-orange-900 font-bold text-xl": "text-orange-900 text-xl"}>Reviews</NavLink>
         </div>
     </div>

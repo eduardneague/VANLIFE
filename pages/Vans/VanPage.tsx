@@ -25,7 +25,7 @@ const VanPage: React.FC = (props): JSX.Element => {
     return (
         <div className = "FLEX_CONTAINER w-full flex justify-center items-center">
             <div className="flex flex-col w-11/12">
-                <Link to = "/vans" className = "text-md underline text-black-700">
+                <Link to = "/vans" className = "text-md text-black-700">
                     <AiOutlineArrowLeft className = "inline text-md text-gray-600 mb-1 mr-2"/>
                     Back to all vans
                 </Link>
@@ -59,7 +59,7 @@ const VanPage: React.FC = (props): JSX.Element => {
                 {isRented ? 
                 <button 
                     onClick = {() => {
-                        console.log("remove ran" + isRented)
+                        // console.log("remove ran" + isRented)
                         toggleRented(id)
                         removeRented(id)
                     }}
@@ -69,7 +69,7 @@ const VanPage: React.FC = (props): JSX.Element => {
                 :
                 <button 
                     onClick = {() => {
-                        console.log("added ran" + isRented)
+                        // console.log("added ran" + isRented)
                         toggleRented(id)
                         addRented(id)
                     }}

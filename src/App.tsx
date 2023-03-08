@@ -10,10 +10,14 @@ import Vans from '../pages/Vans/Vans'
 import VanPage from '../pages/Vans/VanPage'
 
 import HostLayout from '../pages/Host/HostLayout'
+import HostVanLayout from '../pages/Host/Host Vans/HostVanLayout'
 import Dashboard from '../pages/Host/Dashboard'
 import Income from '../pages/Host/Income'
 import Reviews from '../pages/Host/Reviews'
-import HostVans from '../pages/Host/HostVans'
+import HostVans from '../pages/Host/Host Vans/HostVans'
+import HostVanPricing from '../pages/Host/Host Vans/HostVanPricing'
+import HostVanDetails from '../pages/Host/Host Vans/HostVanDetails'
+import HostVanPhotos from '../pages/Host/Host Vans/HostVanPhotos'
 
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
@@ -39,7 +43,12 @@ const App: React.FC = (): JSX.Element => {
                   <Route index element = {<Dashboard/>}/>
                   <Route path = "income" element = {<Income/>}/>
                   <Route path = "reviews" element = {<Reviews/>}/>
-                  <Route path = "vans" element = {<HostVans/>} />
+                  <Route path = "vans" element = {<HostVans/>}/>
+                  <Route path = "vans/:van_id" element = {<HostVanLayout/>}>
+                    <Route index element = {<HostVanDetails/>}/>
+                    <Route path = "pricing" element = {<HostVanPricing/>}/>
+                    <Route path = "photos" element = {<HostVanPhotos/>}/>
+                  </Route>
                 </Route>
 
               </Route>

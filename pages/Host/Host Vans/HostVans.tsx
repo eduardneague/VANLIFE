@@ -1,8 +1,8 @@
 import React, {useContext} from 'react'
-import {Context} from '../../src/ContextProvider'
-import RentedVan from '../../components/RentedVan'
+import {Context} from '../../../src/ContextProvider'
+import RentedVan from '../../../components/RentedVan'
 import {nanoid} from 'nanoid'
-import {VanType} from '../../types/VanType'
+import {VanType} from '../../../types/VanType'
 
 const HostVans: React.FC = (): JSX.Element => {
 
