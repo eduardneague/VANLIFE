@@ -7,7 +7,7 @@ const HostVanLayout = () => {
   return (
     <>
     <div className = "flex justify-center w-full rounded-md">
-      <div className = "bg-white h-auto w-10/12 rounded-md shadow-md">
+      <div className = "bg-white h-auto w-10/12 rounded-md">
         <RentedVanDetail/>
         <HostVanDetailNavBar/>
         <Outlet/>

@@ -29,7 +29,7 @@ const RentedVanDetail: React.FC = () => {
                     Back to all vans
                 </Link>
                 <div className = "bg-white w-full h-36 flex items-center rounded-md">
-                    <div className = "w-32 h-32 shadow ml-2">
+                    <div className = "w-32 shadow h-32 ml-2">
                         <img src= {imageUrl} alt={`image`} className = "w-full h-full object-cover rounded-md"/>
                     </div>
                 <div className = "flex flex-col h-full w-48 gap-2 justify-center ml-3">
