@@ -10,9 +10,8 @@ interface Props {
     imageUrl: string;
     price: number;
     isRented: boolean;
+    filterParam: Object;
 }
-
-// ADD LITTLE INDICATOR TO KNOW IF ITS RENTED OR NOT ON VANS SCREEN, BILU MUIST JEGOS NU MA LASA SA TERMIN
 
 const Van: React.FC<Props> = (props): JSX.Element => {
 
@@ -26,7 +25,7 @@ const Van: React.FC<Props> = (props): JSX.Element => {
   }
 
   return (
-    <Link to = {`/vans/${props.id}`} >
+    <Link to = {props.id} state = {props.filterParam}>
     <div className="VAN_WRAPPER cursor-pointer h-full w-full flex flex-col items-center relative">
       {props.isRented ? <AiFillCheckCircle className = "absolute top-1 right-3 h-8 w-8 text-green-600"/>: ""}
       <img src= {props.imageUrl} alt="image" className = "shadow rounded h-10/12 w-11/12"  />

@@ -19,7 +19,7 @@ const RentedVan: React.FC<Props> = (props): JSX.Element => {
   return (
     
     <div className="flex w-full h-20 bg-white shadow rounded-md items-center mb-5 cursor-pointer relative">
-      <Link to = {`/host/vans/${props.id}`} className = "flex w-full">
+      <Link to = {props.id} className = "flex w-full">
           <div className="imageWrapper h-16 w-16 ml-2 rounded-md shadow">
               <img src= {props.imageUrl} alt="image" className = "h-full w-full object-cover"/>
           </div>

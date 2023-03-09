@@ -1,14 +1,15 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import {Context} from '../../src/ContextProvider'
 import {VanType} from '../../types/VanType'
 import {AiOutlineArrowLeft} from 'react-icons/ai'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 
 const VanPage: React.FC = (props): JSX.Element => {
 
     const {vans, removeRented, addRented, toggleRented, loading} = useContext(Context)
     const {van_id} = useParams()
+    const location = useLocation()
 
     if(loading) {
         return <div className = "ml-10 font-bold">Loading...</div>
@@ -26,10 +27,12 @@ const VanPage: React.FC = (props): JSX.Element => {
             style = {backgroundColor: '#064e3b'}
         }
 
+        const filter = location.state?.filter || ""
+
         return (
             <div className = "FLEX_CONTAINER w-full flex justify-center items-center">
                 <div className="flex flex-col w-11/12">
-                    <Link to = "/vans" className = "text-md text-black-700">
+                    <Link to = {`..${filter}`} className = "text-md text-black-700">
                         <AiOutlineArrowLeft className = "inline text-md text-gray-600 mb-1 mr-2"/>
                         Back to all vans
                     </Link>
