@@ -2,17 +2,17 @@ import React from 'react'
 import {
   RouterProvider,
   createBrowserRouter,
-  createRoutesFromElements,
-  Routes, 
-  Route} from 'react-router-dom'
+  createRoutesFromElements, 
+  Route
+} from 'react-router-dom'
 
 import {ContextProvider} from './ContextProvider'
 
 import Home from '../pages/Home/Home'
 import About from '../pages/About/About'
 
-import Vans from '../pages/Vans/Vans'
-import VanPage from '../pages/Vans/VanPage'
+import Vans, {loader as vansLoader} from '../pages/Vans/Vans'
+import VanPage, {loader as vanPageLoader} from '../pages/Vans/VanPage'
 
 import HostLayout from '../pages/Host/HostLayout'
 import HostVanLayout from '../pages/Host/Host Vans/HostVanLayout'
@@ -25,6 +25,7 @@ import HostVanDetails from '../pages/Host/Host Vans/HostVanDetails'
 import HostVanPhotos from '../pages/Host/Host Vans/HostVanPhotos'
 
 import PageNotFound from '../pages/PageNotFound'
+import WentWrong from '../pages/WentWrong'
 
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
@@ -32,13 +33,13 @@ import Footer from '../components/Footer'
 import './server'
 
 const router = createBrowserRouter(createRoutesFromElements(
-    <Route path = "/" element = {<Layout/>}>
+    <Route path = "/" element = {<Layout/>} errorElement = {<WentWrong/>}>
                 
     <Route index element = {<Home/>}/>
     <Route path = "about" element = {<About/>}/>
     <Route path = "vans">
-      <Route index element = {<Vans/>}/>
-      <Route path = ":van_id" element = {<VanPage/>}/>
+      <Route index element = {<Vans/>} loader = {vansLoader}/>
+      <Route path = ":van_id" element = {<VanPage/>} loader = {vanPageLoader}/>
     </Route>
     
       <Route path = "/host" element = {<HostLayout/>}>

@@ -5,27 +5,22 @@ import {nanoid} from 'nanoid'
 import {VanType} from '../../types/VanType'
 import {Context} from '../../src/ContextProvider'
 
-import {Link, useSearchParams} from 'react-router-dom'
+import {useSearchParams, useLoaderData} from 'react-router-dom'
+
+import {getVans} from '../../src/apiFetch'
+
+const loader = () => {
+    return getVans()
+}
 
 const Vans: React.FC = (): JSX.Element => {
 
-  const {vans, loading} = useContext(Context)
-
+  const {loading} = useContext(Context)
   const [filterParams, setFilterParams] = useSearchParams()
+  const vans = useLoaderData() as VanType[]
+
   const typeFilter = filterParams.get("type")
-
-  if(typeof vans === "undefined") {
-    console.log("Failed to Fetch Vans. :( Try reloading the page.")
-    return (
-      <div className = "h-[46rem] w-full flex justify-center">
-        <div className = "flex flex-col gap-5 justify-center w-10/12  items-center">
-          <h1 className = "text-center text-3xl font-bold max-w-[15rem] ">Something went wrong...</h1>
-          <button onClick = {() => {window.location.reload()}} className = "w-44  h-14 bg-black font-bold text-white text-2xl flex justify-center items-center rounded-md">Reload Page</button>
-        </div> 
-      </div>
-    )
-  }
-
+  
   const sortedVans = vans.sort((a: any, b: any) => {
     return a.name.localeCompare(b.name)
   }) 
@@ -112,3 +107,4 @@ const Vans: React.FC = (): JSX.Element => {
 }
 
 export default Vans
+export {loader}
