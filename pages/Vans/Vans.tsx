@@ -7,27 +7,12 @@ import {Context} from '../../src/ContextProvider'
 
 const Vans: React.FC = (): JSX.Element => {
 
-  const {vans, setVans, loading, initialVans} = useContext(Context)
-
-  function filterVans(type: string): void {
-    if(type === 'clear') {
-      setVans(initialVans)
-      return
-    }
-    else {
-      setVans(initialVans)
-      setVans((prevVans: VanType[]): VanType[] => {
-        return (
-          prevVans.filter((van) => van.type === type)
-        )
-      })
-    }
-  }
+  const {vans, loading} = useContext(Context)
 
   vans.sort((a: any, b: any) => {
     return a.name.localeCompare(b.name)
   }) 
-    
+  
   const vanElements = vans.map((van: VanType) => {
       return (
         <Van
@@ -48,10 +33,10 @@ const Vans: React.FC = (): JSX.Element => {
         <div className="FLEX_WRAPPER w-10/12 flex flex-col gap-3">
           <h1 className = "font-bold text-2xl">Explore our van options</h1>
           <div className="FILTER_FLEX_CONTAINER flex gap-2">
-              <div className = "flex justify-center text-md items-center rounded-lg text-black w-24 h-7 bg-orange-300 cursor-pointer" onClick = {() => filterVans('simple')}>Simple</div>
-              <div className = "flex justify-center text-md items-center rounded-lg text-black w-24 h-7 bg-orange-300 cursor-pointer" onClick = {() => filterVans('luxury')}>Luxury</div>
-              <div className = "flex justify-center text-md items-center rounded-lg text-black w-24 h-7 bg-orange-300 cursor-pointer" onClick = {() => filterVans('rugged')}>Rugged</div>
-              <div className = "flex justify-center text-md items-center rounded-lg text-black w-40 h-7 cursor-pointer underline" onClick = {() => filterVans('clear')} >Clear filters</div>
+              <div className = "flex justify-center text-md items-center rounded-lg text-black w-24 h-7 bg-orange-300 cursor-pointer">Simple</div>
+              <div className = "flex justify-center text-md items-center rounded-lg text-black w-24 h-7 bg-orange-300 cursor-pointer">Luxury</div>
+              <div className = "flex justify-center text-md items-center rounded-lg text-black w-24 h-7 bg-orange-300 cursor-pointer">Rugged</div>
+              <div className = "flex justify-center text-md items-center rounded-lg text-black w-40 h-7 cursor-pointer underline">Clear filters</div>
           </div>
         </div>
       </div>

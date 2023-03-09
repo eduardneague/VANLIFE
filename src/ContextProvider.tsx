@@ -13,7 +13,7 @@ const ContextProvider: React.FC<Props> = ({children}): JSX.Element => {
     const [initialVans, setInitialVans] = useState<VanType[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [rentedVans, setRentedVans] = useState<VanType[]>([])
-
+ 
     function toggleRented(id: string): void {
         setVans((prevVans: any) => {
             return prevVans.map((van: VanType) => {
@@ -61,7 +61,7 @@ const ContextProvider: React.FC<Props> = ({children}): JSX.Element => {
         const fetchRequest = async () => {
           const response = await fetch("/api/vans")
           const data = await response.json()
-          setVans(data.vans) 
+          setVans(data.vans)
           setInitialVans(data.vans)
           setLoading(false)
         }
@@ -80,7 +80,7 @@ const ContextProvider: React.FC<Props> = ({children}): JSX.Element => {
                 setRentedVans, 
                 toggleRented, 
                 removeRented,
-                addRented
+                addRented,
             }} 
         >
             {children}
