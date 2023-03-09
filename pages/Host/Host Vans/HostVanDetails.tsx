@@ -3,7 +3,6 @@ import {useOutletContext} from 'react-router-dom'
 import { VanType } from '../../../types/VanType'
 
 const HostVanDetails: React.FC = () => {
-
     const {name, type, description}: VanType = useOutletContext()
 
     return (

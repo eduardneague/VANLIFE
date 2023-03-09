@@ -19,6 +19,8 @@ import HostVanPricing from '../pages/Host/Host Vans/HostVanPricing'
 import HostVanDetails from '../pages/Host/Host Vans/HostVanDetails'
 import HostVanPhotos from '../pages/Host/Host Vans/HostVanPhotos'
 
+import PageNotFound from '../pages/PageNotFound'
+
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
 
@@ -32,6 +34,7 @@ const App: React.FC = (): JSX.Element => {
         <div className="CONTENT_WRAP pb-20">
             <Routes>
               <Route path = "/" element = {<Layout/>}>
+                
                 <Route index element = {<Home/>}/>
                 <Route path = "about" element = {<About/>}/>
                 <Route path = "vans">
@@ -50,7 +53,7 @@ const App: React.FC = (): JSX.Element => {
                     <Route path = "photos" element = {<HostVanPhotos/>}/>
                   </Route>
                 </Route>
-
+                <Route path = "*" element = {<PageNotFound/>}/>
               </Route>
             </Routes>
         </div>

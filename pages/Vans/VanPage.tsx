@@ -5,16 +5,39 @@ import {VanType} from '../../types/VanType'
 import {AiOutlineArrowLeft} from 'react-icons/ai'
 import {Link, useLocation} from 'react-router-dom'
 
+import PageNotFound from '../PageNotFound'
+
 const VanPage: React.FC = (props): JSX.Element => {
 
     const {vans, removeRented, addRented, toggleRented, loading} = useContext(Context)
     const {van_id} = useParams()
     const location = useLocation()
+    let show: boolean = false
+
+    if(typeof vans === "undefined") {
+        console.log("Failed to Fetch Vans. :( Try reloading the page.")
+        return (
+          <div className = "h-[46rem] w-full flex justify-center">
+            <div className = "flex flex-col gap-5 justify-center w-10/12  items-center">
+              <h1 className = "text-center text-3xl font-bold max-w-[15rem] ">Something went wrong...</h1>
+              <button onClick = {() => {window.location.reload()}} className = "w-44  h-14 bg-black font-bold text-white text-2xl flex justify-center items-center rounded-md">Reload Page</button>
+            </div> 
+          </div>
+        )
+      }
+
+    for(let i = 0; i < vans.length; i++) {
+        if(vans[i].id === van_id) {
+            show = true
+            break
+        } 
+    }
 
     if(loading) {
         return <div className = "ml-10 font-bold">Loading...</div>
     }
     else {
+        if(show) {
         const {id, name, price, description, imageUrl, type, isRented}: 
         VanType = vans.find((van: {id: string}) => van.id === van_id)
 
@@ -29,12 +52,15 @@ const VanPage: React.FC = (props): JSX.Element => {
 
         const filter = location.state?.filter || ""
 
+        const filterString = filter.slice(6, 20)
+        const backToString = filterString.slice(0, 1).toUpperCase() + filterString.slice(1, 20)
+
         return (
             <div className = "FLEX_CONTAINER w-full flex justify-center items-center">
                 <div className="flex flex-col w-11/12">
                     <Link to = {`..${filter}`} className = "text-md text-black-700">
                         <AiOutlineArrowLeft className = "inline text-md text-gray-600 mb-1 mr-2"/>
-                        Back to all vans
+                        Back to {backToString} vans
                     </Link>
                     <img src={`${imageUrl}`}  alt= {`${name} Image`} 
                     className = "rounded-lg w-full object-cover mt-5"/>
@@ -86,8 +112,12 @@ const VanPage: React.FC = (props): JSX.Element => {
                 </div>
             </div>
         )
+        } else {
+            return (
+                <PageNotFound/>
+            )
+        }
     }
-    
 }
 
 export default VanPage

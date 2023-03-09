@@ -12,6 +12,18 @@ const RentedVanDetail: React.FC = () => {
 
     const {imageUrl, name, type, price} = rentedVans.find((van: VanType) => van.id === van_id)
 
+    if(typeof rentedVans === "undefined") {
+        console.log("Failed to Fetch Vans. :( Try reloading the page.")
+        return (
+          <div className = "h-[46rem] w-full flex justify-center">
+            <div className = "flex flex-col gap-5 justify-center w-10/12  items-center">
+              <h1 className = "text-center text-3xl font-bold max-w-[15rem] ">Something went wrong...</h1>
+              <button onClick = {() => {window.location.reload()}} className = "w-44  h-14 bg-black font-bold text-white text-2xl flex justify-center items-center rounded-md">Reload Page</button>
+            </div> 
+          </div>
+        )
+      }
+
     let style
     if(type === 'simple') {
         style = {backgroundColor: '#f97316'}

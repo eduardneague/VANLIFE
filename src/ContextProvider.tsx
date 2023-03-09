@@ -60,10 +60,19 @@ const ContextProvider: React.FC<Props> = ({children}): JSX.Element => {
     useEffect(() => {
         const fetchRequest = async () => {
           const response = await fetch("/api/vans")
-          const data = await response.json()
-          setVans(data.vans)
-          setInitialVans(data.vans)
-          setLoading(false)
+            if(!response.ok) {
+                throw {
+                    message: "Something went wrong...",
+                    statusText: response.statusText,
+                    status: response.status
+                }
+            }
+
+            const data = await response.json()
+            
+            setVans(data.vans)
+            setInitialVans(data.vans)
+            setLoading(false)
         }
         fetchRequest()
       }, [])
