@@ -5,6 +5,8 @@ import {nanoid} from 'nanoid'
 import {VanType} from '../../types/VanType'
 import {Context} from '../../src/ContextProvider'
 
+import {useSearchParams} from 'react-router-dom'
+
 const Vans: React.FC = (): JSX.Element => {
 
   const {vans, loading} = useContext(Context)
