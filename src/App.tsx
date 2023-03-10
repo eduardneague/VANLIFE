@@ -28,6 +28,7 @@ import PageNotFound from '../pages/PageNotFound'
 import WentWrong from '../pages/WentWrong'
 
 import Login from '../pages/Login/Login'
+import AuthRequired from '../components/AuthRequired'
 
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
@@ -35,16 +36,16 @@ import Footer from '../components/Footer'
 import './server'
 
 const router = createBrowserRouter(createRoutesFromElements(
-    <Route path = "/" element = {<Layout/>} errorElement = {<WentWrong/>}>
-                
-    <Route index element = {<Home/>}/>
-    <Route path = "about" element = {<About/>}/>
-    <Route path = "vans">
-      <Route index element = {<Vans/>} loader = {vansLoader}/>
-      <Route path = ":van_id" element = {<VanPage/>} loader = {vanPageLoader}/>
-    </Route>
-    <Route path = "login" element = {<Login/>} />
-    
+    <Route element = {<Layout/>} errorElement = {<WentWrong/>}>          
+      <Route index element = {<Home/>}/>
+      <Route path = "about" element = {<About/>}/>
+      <Route path = "vans">
+        <Route index element = {<Vans/>} loader = {vansLoader}/>
+        <Route path = ":van_id" element = {<VanPage/>} loader = {vanPageLoader}/>
+      </Route>
+      <Route path = "login" element = {<Login/>} />
+      
+      <Route element = {<AuthRequired/>}>
       <Route path = "/host" element = {<HostLayout/>}>
         <Route index element = {<Dashboard/>}/>
         <Route path = "income" element = {<Income/>}/>
@@ -56,6 +57,8 @@ const router = createBrowserRouter(createRoutesFromElements(
           <Route path = "photos" element = {<HostVanPhotos/>}/>
         </Route>
       </Route>
+      </Route>
+
       <Route path = "*" element = {<PageNotFound/>}/>
     </Route>
 )) 

@@ -1,14 +1,44 @@
 import React, {useState} from 'react'
 import {LoginType} from '../../types/LoginType'
 import { AiFillEye, AiOutlineEye } from 'react-icons/ai'
+import {useLocation, useNavigate} from 'react-router-dom'
+import {loginUser} from '../../src/apiFetch'
 
 const Login: React.FC = (): JSX.Element => {
 
     const [loginData, setLoginData] = useState<LoginType>({email: "", password: ""})
     const [showPass, setShowPass] = useState<boolean>(false)
-    
+    const [status, setStatus] = useState<string>("idle")
+    const [buttonDisable, setButtonDisable] = useState<boolean>(false)
+    const [error, setError] = useState<Error | null>(null)
+
+    const location = useLocation()
+
     function handleSubmit(event: React.SyntheticEvent<EventTarget>):void {
-       
+        event.preventDefault()
+
+        async function login(): Promise<LoginType> {
+            setStatus("submitting")
+            setButtonDisable(true)
+
+            try {
+                const response = await loginUser(loginData)
+                setStatus("idle")
+                setButtonDisable(false)
+                setError(null)
+                console.log(response)
+                return response
+            }
+            catch(error: any) {
+                setError(error)
+                throw new Error(error.message)
+            }
+            finally {
+                setStatus("idle")
+                setButtonDisable(false)
+            }
+        }
+        login()
     }
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>):void {
@@ -30,7 +60,14 @@ const Login: React.FC = (): JSX.Element => {
     return (
         <div className = "flex w-full h-[46rem] justify-center">
             <div className = "flex flex-col gap-5 w-10/12 h-full justify-center items-center">
-                <h1 className = "text-3xl font-bold">Sign in to your account</h1>
+                <h2 className = "text-orange-500 font-bold text-xl"> 
+                    {location.state?.message} 
+                </h2>
+                <h1 className = "text-2xl font-bold text-center">Sign in to your account</h1>
+                <div>
+                    {error && <h1 className = "text-red-500 font-bold text-lg text-center"> {error.message} </h1>}
+                </div>
+                
                 <form action="" onSubmit = {handleSubmit} className = "flex flex-col gap-4 w-full">
                     <input 
                         type="email"
@@ -58,7 +95,11 @@ const Login: React.FC = (): JSX.Element => {
                     </div>
 
                     </div>
-                    <button className = "cursor-pointer w-full h-12 rounded-lg bg-orange-500 text-white font-bold text-xl">Sign In</button>
+                    <button 
+                        disabled = {buttonDisable}
+                        className ={` ${buttonDisable ? "bg-gray-500" : "bg-orange-500"} cursor-pointer w-full h-12 rounded-lg  text-white font-bold text-xl`}>
+                            {status === "submitting" ? "Logging in..." : "Log In"}
+                        </button>
                 </form>
                 <h2 className = "text-md font-normal">Don't have an account? 
                     <span className = "text-md text-orange-500 font-bold cursor-pointer"> Create one now</span>
