@@ -1,5 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import {BiUserCircle} from 'react-icons/bi'
 
 const Navbar: React.FC = (): JSX.Element => {
   return (
@@ -14,6 +15,12 @@ const Navbar: React.FC = (): JSX.Element => {
 
               <NavLink to = "host" className = 
               {({isActive}) => isActive ? "text-orange-900  font-bold": "text-orange-900 "}>Host</NavLink>
+
+              <NavLink to = "login" className = 
+              {({isActive}) => isActive ? "text-orange-900  font-bold": "text-orange-900 "}>
+                <BiUserCircle className = "text-2xl"/>
+            </NavLink>
+
           </div>
       </div>
   )
