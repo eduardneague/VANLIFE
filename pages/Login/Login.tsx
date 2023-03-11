@@ -1,61 +1,56 @@
 import React, {useState} from 'react'
 import {LoginType} from '../../types/LoginType'
 import { AiFillEye, AiOutlineEye } from 'react-icons/ai'
-import {useLocation, useNavigate, Navigate} from 'react-router-dom'
+import {
+    useLocation, 
+    useNavigate, 
+    Navigate, 
+    Form, 
+    useActionData, 
+    useNavigation
+} from 'react-router-dom'
 import {loginUser} from '../../src/apiFetch'
+
+export async function action( {request}: any ): Promise<LoginType | unknown> {
+    const loginData = await request.formData()
+
+    const email = loginData.get("email")
+    const password = loginData.get("password")
+
+    try {
+        const data = await loginUser({email, password})
+        localStorage.setItem("loggedIn", "true")
+        return data
+    }
+    catch(err: any) {
+        return {
+            error: err.message
+        }
+    }
+    finally {
+
+    }
+}
 
 const Login: React.FC = (): JSX.Element => {
 
-    const [loginData, setLoginData] = useState<LoginType>({email: "", password: ""})
     const [showPass, setShowPass] = useState<boolean>(false)
     const [status, setStatus] = useState<string>("idle")
-    const [buttonDisable, setButtonDisable] = useState<boolean>(false)
     const [error, setError] = useState<Error | null>(null)
 
     const navigate = useNavigate()
+
+    const navigation = useNavigation()
+
     const location = useLocation()
 
-    function handleSubmit(event: React.SyntheticEvent<EventTarget>):void {
-        event.preventDefault()
+    const redirectValue: string = location.state?.location.pathname || "/host"
+    console.log(redirectValue)
+    const data: any = useActionData()
 
-        async function login(): Promise<LoginType> {
-            setStatus("submitting")
-            setButtonDisable(true)
 
-            try {
-                const response = await loginUser(loginData)
-
-                setStatus("idle")
-                setButtonDisable(false)
-                setError(null)
-
-                localStorage.setItem("loggedIn", "true")
-                navigate("/host", {replace: true})
-
-                return response
-            }
-            catch(error: any) {
-                setError(error)
-                throw new Error(error.message)
-            }
-            finally {
-                setStatus("idle")
-                setButtonDisable(false)
-            }
-        }
-        login()
-    }
-
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>):void {
-        const {name, value} = event.target
-        setLoginData(prevData => {
-            return (
-                {
-                    ...prevData,
-                    [name]: value
-                }
-            )
-        })
+    if(data?.token) {
+        navigate(`${redirectValue}`, {replace: true})
     }
 
     function togglePassword():void {
@@ -71,17 +66,15 @@ const Login: React.FC = (): JSX.Element => {
                 </h2>
                 <h1 className = "text-2xl font-bold text-center">Sign in to your account</h1>
                 <div>
-                    {error && <h1 className = "text-red-500 font-bold text-lg text-center"> {error.message} </h1>}
+                    {data?.error && <h1 className = "text-red-500 font-bold text-lg text-center"> {data.error} </h1>}
                 </div>
                 
-                <form action="" onSubmit = {handleSubmit} className = "flex flex-col gap-4 w-full">
+                <Form action = "/login" method = "post" className = "flex flex-col gap-4 w-full">
                     <input 
                         type="email"
                         name = "email" 
                         placeholder = "Email address" 
                         className = "w-full h-12 rounded-lg pl-3 outline-orange-500 shadow-sm shadow-orange-200"
-                        onChange = {handleChange}
-                        value = {loginData.email}
                     />
                     <div className = "relative">
                         <input 
@@ -89,8 +82,6 @@ const Login: React.FC = (): JSX.Element => {
                             name = "password"
                             placeholder = "Password" 
                             className = "w-full h-12 rounded-lg pl-3 outline-orange-500 shadow-sm shadow-orange-200" 
-                            onChange = {handleChange}
-                            value = {loginData.password}
                             id = "passwordInput"
                         />
                         <div 
@@ -102,11 +93,11 @@ const Login: React.FC = (): JSX.Element => {
 
                     </div>
                     <button 
-                        disabled = {buttonDisable}
-                        className ={` ${buttonDisable ? "bg-gray-500" : "bg-orange-500"} cursor-pointer w-full h-12 rounded-lg  text-white font-bold text-xl`}>
-                            {status === "submitting" ? "Logging in..." : "Log In"}
+                        disabled = {navigation.state === "submitting"}
+                        className ={` ${navigation.state === "submitting" ? "bg-gray-500" : "bg-orange-500"} cursor-pointer w-full h-12 rounded-lg  text-white font-bold text-xl`}>
+                            {navigation.state === "submitting" ? "Logging in..." : "Log In"}
                         </button>
-                </form>
+                </Form>
                 <h2 className = "text-md font-normal">Don't have an account? 
                     <span className = "text-md text-orange-500 font-bold cursor-pointer"> Create one now</span>
                 </h2> 
