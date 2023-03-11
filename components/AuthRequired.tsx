@@ -2,12 +2,13 @@ import React from 'react'
 import {Navigate, Outlet} from 'react-router-dom'
 
 const AuthRequired: React.FC = (): JSX.Element => {
-    const auth = {token: null}
+    const loggedIn = localStorage.getItem("loggedIn")
 
-    if(!auth.token) {
+    if(loggedIn == "null") {
         return (
             <Navigate 
                 to = "/login" 
+                replace = {true}
                 state = {{message: "You must log in first!"}} 
             />
         )

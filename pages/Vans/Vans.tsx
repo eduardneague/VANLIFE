@@ -15,9 +15,9 @@ const loader = () => {
 
 const Vans: React.FC = (): JSX.Element => {
 
-  const {loading} = useContext(Context)
+  const {loading, vans} = useContext(Context)
   const [filterParams, setFilterParams] = useSearchParams()
-  const vans = useLoaderData() as VanType[]
+  const vans1 = useLoaderData() as VanType[]
 
   const typeFilter = filterParams.get("type")
   

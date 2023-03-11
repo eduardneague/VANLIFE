@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {LoginType} from '../../types/LoginType'
 import { AiFillEye, AiOutlineEye } from 'react-icons/ai'
-import {useLocation, useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate, Navigate} from 'react-router-dom'
 import {loginUser} from '../../src/apiFetch'
 
 const Login: React.FC = (): JSX.Element => {
@@ -12,6 +12,7 @@ const Login: React.FC = (): JSX.Element => {
     const [buttonDisable, setButtonDisable] = useState<boolean>(false)
     const [error, setError] = useState<Error | null>(null)
 
+    const navigate = useNavigate()
     const location = useLocation()
 
     function handleSubmit(event: React.SyntheticEvent<EventTarget>):void {
@@ -23,10 +24,14 @@ const Login: React.FC = (): JSX.Element => {
 
             try {
                 const response = await loginUser(loginData)
+
                 setStatus("idle")
                 setButtonDisable(false)
                 setError(null)
-                console.log(response)
+
+                localStorage.setItem("loggedIn", "true")
+                navigate("/host", {replace: true})
+
                 return response
             }
             catch(error: any) {
@@ -57,8 +62,9 @@ const Login: React.FC = (): JSX.Element => {
         setShowPass((prevPass) => !prevPass)
     }
 
-    return (
-        <div className = "flex w-full h-[46rem] justify-center">
+    if(localStorage.getItem("loggedIn") == "null") {
+        return (
+            <div className = "flex w-full h-[46rem] justify-center">
             <div className = "flex flex-col gap-5 w-10/12 h-full justify-center items-center">
                 <h2 className = "text-orange-500 font-bold text-xl"> 
                     {location.state?.message} 
@@ -78,21 +84,21 @@ const Login: React.FC = (): JSX.Element => {
                         value = {loginData.email}
                     />
                     <div className = "relative">
-                    <input 
-                        type= {showPass ? "text" : "password"}
-                        name = "password"
-                        placeholder = "Password" 
-                        className = "w-full h-12 rounded-lg pl-3 outline-orange-500 shadow-sm shadow-orange-200" 
-                        onChange = {handleChange}
-                        value = {loginData.password}
-                        id = "passwordInput"
-                    />
-                    <div 
-                        className = "flex justify-center items-center h-8 w-8 absolute border border-orange-500 border-solid top-2 right-2 rounded-md"
-                        onClick = {togglePassword}
-                    >
-                        {showPass ? <AiFillEye className = "text-orange-500 text-xl"/> : <AiOutlineEye className = "text-orange-500 text-xl"/>}
-                    </div>
+                        <input 
+                            type= {showPass ? "text" : "password"}
+                            name = "password"
+                            placeholder = "Password" 
+                            className = "w-full h-12 rounded-lg pl-3 outline-orange-500 shadow-sm shadow-orange-200" 
+                            onChange = {handleChange}
+                            value = {loginData.password}
+                            id = "passwordInput"
+                        />
+                        <div 
+                            className = "flex justify-center items-center h-8 w-8 absolute border border-orange-500 border-solid top-2 right-2 rounded-md"
+                            onClick = {togglePassword}
+                        >
+                            {showPass ? <AiFillEye className = "text-orange-500 text-xl"/> : <AiOutlineEye className = "text-orange-500 text-xl"/>}
+                        </div>
 
                     </div>
                     <button 
@@ -106,7 +112,15 @@ const Login: React.FC = (): JSX.Element => {
                 </h2> 
             </div>
         </div>
-    )
+        )
+    } else {
+        return (
+            <Navigate 
+                to = "/host"
+                state = {{message: "You are already Logged In!"}} 
+            />
+        )
+    }
 }
 
 export default Login

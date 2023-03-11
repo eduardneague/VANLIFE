@@ -46,17 +46,17 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path = "login" element = {<Login/>} />
       
       <Route element = {<AuthRequired/>}>
-      <Route path = "/host" element = {<HostLayout/>}>
-        <Route index element = {<Dashboard/>}/>
-        <Route path = "income" element = {<Income/>}/>
-        <Route path = "reviews" element = {<Reviews/>}/>
-        <Route path = "vans" element = {<HostVans/>}/>
-        <Route path = "vans/:van_id" element = {<HostVanLayout/>}>
-          <Route index element = {<HostVanDetails/>}/>
-          <Route path = "pricing" element = {<HostVanPricing/>}/>
-          <Route path = "photos" element = {<HostVanPhotos/>}/>
+        <Route path = "/host" element = {<HostLayout/>}>
+          <Route index element = {<Dashboard/>}/>
+          <Route path = "income" element = {<Income/>}/>
+          <Route path = "reviews" element = {<Reviews/>}/>
+          <Route path = "vans" element = {<HostVans/>}/>
+          <Route path = "vans/:van_id" element = {<HostVanLayout/>}>
+            <Route index element = {<HostVanDetails/>}/>
+            <Route path = "pricing" element = {<HostVanPricing/>}/>
+            <Route path = "photos" element = {<HostVanPhotos/>}/>
+          </Route>
         </Route>
-      </Route>
       </Route>
 
       <Route path = "*" element = {<PageNotFound/>}/>
