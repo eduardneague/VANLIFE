@@ -27,27 +27,16 @@ export async function action( {request}: any ): Promise<LoginType | unknown> {
             error: err.message
         }
     }
-    finally {
-
-    }
 }
 
 const Login: React.FC = (): JSX.Element => {
 
     const [showPass, setShowPass] = useState<boolean>(false)
-    const [status, setStatus] = useState<string>("idle")
-    const [error, setError] = useState<Error | null>(null)
-
     const navigate = useNavigate()
-
     const navigation = useNavigation()
-
     const location = useLocation()
-
     const redirectValue: string = location.state?.location.pathname || "/host"
-    console.log(redirectValue)
     const data: any = useActionData()
-
 
     if(data?.token) {
         navigate(`${redirectValue}`, {replace: true})
