@@ -3,7 +3,7 @@ import {useParams, Await,} from 'react-router-dom'
 import {Context} from '../../src/ContextProvider'
 import {VanType} from '../../types/VanType'
 import {AiOutlineArrowLeft} from 'react-icons/ai'
-import {Link, useLocation, useLoaderData} from 'react-router-dom'
+import {Link, useLocation, useLoaderData, defer} from 'react-router-dom'
 import {getVans} from '../../src/apiFetch'
 
 import PageNotFound from '../PageNotFound'
