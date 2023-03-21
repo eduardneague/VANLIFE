@@ -6,9 +6,10 @@ import { AiFillStar } from 'react-icons/ai'
 import RentedVan from '../../components/RentedVan'
 import {Context} from '../../src/ContextProvider'
 
-const Dashboard: React.FC = (): JSX.Element => {
+const Dashboard: React.FC = (): JSX.Element => { 
   const [render, setRender] = useState(false)
   const location = useLocation()
+  
   const loggedIn = localStorage.getItem("loggedIn")
 
   function handleClick(): void {
